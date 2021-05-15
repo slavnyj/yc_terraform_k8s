@@ -1,0 +1,623 @@
+Last login: Thu May 13 22:06:43 on ttys009
+source ~/.bash_profile
+mbp:~ ivanov1$ source ~/.bash_profile
+mbp:~ ivanov1$ cd Projects/yc_terraform_k8s/
+mbp:yc_terraform_k8s ivanov1$ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm-1 will be created
+  + resource "yandex_compute_instance" "vm-1" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + metadata                  = {
+          + "user-data" = <<-EOT
+                #cloud-config
+                users:
+                  - name: robot
+                    groups: sudo
+                    shell: /bin/bash
+                    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+                    ssh-authorized-keys:
+                      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDYsxvRNx9jDGqO+KRyQFavaAyCMylDxGiPH3rviEj3bCn5cFFeUyWnxiC0aSr95JalnZ3KwaKAHGJC3ZUhui/4kJbtb94krQrNOBDKQBx6wsuwmcQAV0a9sF1a2CGVnbnzZ/aV979U9SncN96danGzePt84r+HoHxYyJydimoC9w== ivanov1@mbp.local
+            EOT
+        }
+      + name                      = "terraform1"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v2"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + description = (known after apply)
+              + image_id    = "fd8vmcue7aajpmeo39kk"
+              + name        = (known after apply)
+              + size        = 10
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + placement_policy {
+          + placement_group_id = (known after apply)
+        }
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = (known after apply)
+        }
+    }
+
+  # yandex_compute_instance.vm-2 will be created
+  + resource "yandex_compute_instance" "vm-2" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + metadata                  = {
+          + "user-data" = <<-EOT
+                #cloud-config
+                users:
+                  - name: robot
+                    groups: sudo
+                    shell: /bin/bash
+                    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+                    ssh-authorized-keys:
+                      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDYsxvRNx9jDGqO+KRyQFavaAyCMylDxGiPH3rviEj3bCn5cFFeUyWnxiC0aSr95JalnZ3KwaKAHGJC3ZUhui/4kJbtb94krQrNOBDKQBx6wsuwmcQAV0a9sF1a2CGVnbnzZ/aV979U9SncN96danGzePt84r+HoHxYyJydimoC9w== ivanov1@mbp.local
+            EOT
+        }
+      + name                      = "terraform2"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v2"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + description = (known after apply)
+              + image_id    = "fd8vmcue7aajpmeo39kk"
+              + name        = (known after apply)
+              + size        = 10
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + placement_policy {
+          + placement_group_id = (known after apply)
+        }
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = (known after apply)
+        }
+    }
+
+  # yandex_vpc_network.network-1 will be created
+  + resource "yandex_vpc_network" "network-1" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + name                      = "network1"
+[masters]
+      + subnet_ids                = (known after apply)
+    }
+
+  # yandex_vpc_subnet.subnet-1 will be created
+  + resource "yandex_vpc_subnet" "subnet-1" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + name           = "subnet1"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "192.168.10.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-b"
+    }
+
+Plan: 4 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + external_ip_address_vm_1 = (known after apply)
+  + external_ip_address_vm_2 = (known after apply)
+  + internal_ip_address_vm_1 = (known after apply)
+  + internal_ip_address_vm_2 = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_vpc_network.network-1: Creating...
+yandex_vpc_network.network-1: Creation complete after 2s [id=enpevd3eicot702tjvp0]
+yandex_vpc_subnet.subnet-1: Creating...
+yandex_vpc_subnet.subnet-1: Creation complete after 1s [id=e2leb2h2q2ffbk35bi16]
+yandex_compute_instance.vm-1: Creating...
+yandex_compute_instance.vm-2: Creating...
+yandex_compute_instance.vm-2: Still creating... [10s elapsed]
+yandex_compute_instance.vm-1: Still creating... [10s elapsed]
+yandex_compute_instance.vm-1: Still creating... [20s elapsed]
+yandex_compute_instance.vm-2: Still creating... [20s elapsed]
+yandex_compute_instance.vm-1: Still creating... [30s elapsed]
+yandex_compute_instance.vm-2: Still creating... [30s elapsed]
+yandex_compute_instance.vm-1: Creation complete after 30s [id=epdo63p78o4ksh6ln2rb]
+yandex_compute_instance.vm-2: Creation complete after 30s [id=epde78hjfria3r6gt65g]
+
+Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+external_ip_address_vm_1 = "84.201.161.8"
+external_ip_address_vm_2 = "84.201.138.149"
+internal_ip_address_vm_1 = "192.168.10.30"
+internal_ip_address_vm_2 = "192.168.10.8"
+mbp:yc_terraform_k8s ivanov1$ vim /etc/ansible/ansible.cfg
+mbp:yc_terraform_k8s ivanov1$ vim /etc/ansible/hosts
+mbp:yc_terraform_k8s ivanov1$ sudo vim /etc/ansible/hosts
+Password:
+mbp:yc_terraform_k8s ivanov1$ ansible master -m ping
+[DEPRECATION WARNING]: ALLOW_WORLD_READABLE_TMPFILES option, moved to a per plugin approach that is more flexible, use mostly the same config will work, but now controlled from the plugin itself and not using the general constant. instead. This feature will be removed from ansible-base in version 2.14. Deprecation warnings can be disabled
+by setting deprecation_warnings=False in ansible.cfg.
+The authenticity of host '84.201.161.8 (84.201.161.8)' can't be established.
+ECDSA key fingerprint is SHA256:0vHR3EocS/EqQOt+tZt2mdOSp+I3SQVQdv+6JU3pTg4.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+master | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+mbp:yc_terraform_k8s ivanov1$ ansible workers -m ping
+[DEPRECATION WARNING]: ALLOW_WORLD_READABLE_TMPFILES option, moved to a per plugin approach that is more flexible, use mostly the same config will work, but now controlled from the plugin itself and not using the general constant. instead. This feature will be removed from ansible-base in version 2.14. Deprecation warnings can be disabled
+by setting deprecation_warnings=False in ansible.cfg.
+The authenticity of host '84.201.138.149 (84.201.138.149)' can't be established.
+ECDSA key fingerprint is SHA256:NUULIPHam9oAc3TpYcmTHzd7E3ajq1Q2WkLp2PBlD+M.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+worker1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+mbp:yc_terraform_k8s ivanov1$ cd kubernetes-setup/
+mbp:kubernetes-setup ivanov1$ ansible-playbook create-k8s-cluster.yml
+[DEPRECATION WARNING]: ALLOW_WORLD_READABLE_TMPFILES option, moved to a per plugin approach that is more flexible, use mostly the same config will work, but now controlled from the plugin itself and not using the general constant. instead. This feature will be removed from ansible-base in version 2.14. Deprecation warnings can be disabled
+by setting deprecation_warnings=False in ansible.cfg.
+
+PLAY [Create user for k8s on all hosts] ***************************************************************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [worker1]
+ok: [master]
+
+TASK [Create user - kubeuser] *************************************************************************************************************************************************************************************************************************************************************************************************************************
+[WARNING]: 'append' is set, but no 'groups' are specified. Use 'groups' for appending new groups.This will change to an error in Ansible 2.14.
+changed: [worker1]
+changed: [master]
+
+TASK [allow user kubeuser to have passwordless sudo] **************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [worker1]
+changed: [master]
+
+TASK [Set authorized key for the kubeuser user] *******************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [worker1] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDYsxvRNx9jDGqO+KRyQFavaAyCMylDxGiPH3rviEj3bCn5cFFeUyWnxiC0aSr95JalnZ3KwaKAHGJC3ZUhui/4kJbtb94krQrNOBDKQBx6wsuwmcQAV0a9sF1a2CGVnbnzZ/aV979U9SncN96danGzePt84r+HoHxYyJydimoC9w== ivanov1@mbp.local)
+changed: [master] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDYsxvRNx9jDGqO+KRyQFavaAyCMylDxGiPH3rviEj3bCn5cFFeUyWnxiC0aSr95JalnZ3KwaKAHGJC3ZUhui/4kJbtb94krQrNOBDKQBx6wsuwmcQAV0a9sF1a2CGVnbnzZ/aV979U9SncN96danGzePt84r+HoHxYyJydimoC9w== ivanov1@mbp.local)
+
+PLAY [all] ********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [worker1]
+ok: [master]
+
+TASK [Remove swapfile from /etc/fstab] ****************************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [worker1] => (item=swap)
+ok: [master] => (item=swap)
+changed: [worker1] => (item=none)
+changed: [master] => (item=none)
+
+TASK [Disable swap] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [worker1]
+changed: [master]
+
+TASK [Install on servers - Docker] ********************************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [worker1]
+changed: [master]
+
+TASK [Install on servers - APT Transport HTTPS] *******************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [worker1]
+ok: [master]
+
+TASK [Add Kubernetes apt-key] *************************************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [worker1]
+changed: [master]
+
+TASK [Add Kubernetes APT repository] ******************************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [worker1]
+changed: [master]
+
+TASK [Install on servers - kubelet] *******************************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [worker1]
+changed: [master]
+
+TASK [Install on servers - kubeadm] *******************************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [master]
+changed: [worker1]
+
+PLAY [master] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [master]
+
+TASK [Install on master server - kubectl] *************************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [master]
+
+PLAY [master] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [master]
+
+TASK [Initialize the cluster] *************************************************************************************************************************************************************************************************************************************************************************************************************************
+[WARNING]: Consider using 'become', 'become_method', and 'become_user' rather than running sudo
+changed: [master]
+
+TASK [Create .kube directory] *************************************************************************************************************************************************************************************************************************************************************************************************************************
+[WARNING]: Using world-readable permissions for temporary files Ansible needs to create when becoming an unprivileged user. This may be insecure. For information on securing this, see https://docs.ansible.com/ansible/user_guide/become.html#risks-of-becoming-an-unprivileged-user
+changed: [master]
+
+TASK [Copy admin.conf to user's kube config] **********************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [master]
+
+TASK [Install Flannel Pod network] ********************************************************************************************************************************************************************************************************************************************************************************************************************
+[WARNING]: Using world-readable permissions for temporary files Ansible needs to create when becoming an unprivileged user. This may be insecure. For information on securing this, see https://docs.ansible.com/ansible/user_guide/become.html#risks-of-becoming-an-unprivileged-user
+changed: [master]
+
+PLAY [master] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Get join command] *******************************************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [master]
+
+TASK [Set join command] *******************************************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [master]
+
+PLAY [workers] ****************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [worker1]
+
+TASK [Join to cluster] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [worker1]
+
+PLAY [master] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+[WARNING]: Using world-readable permissions for temporary files Ansible needs to create when becoming an unprivileged user. This may be insecure. For information on securing this, see https://docs.ansible.com/ansible/user_guide/become.html#risks-of-becoming-an-unprivileged-user
+ok: [master]
+
+TASK [Install k8s dashboard] **************************************************************************************************************************************************************************************************************************************************************************************************************************
+[WARNING]: Using world-readable permissions for temporary files Ansible needs to create when becoming an unprivileged user. This may be insecure. For information on securing this, see https://docs.ansible.com/ansible/user_guide/become.html#risks-of-becoming-an-unprivileged-user
+changed: [master]
+
+PLAY RECAP ********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+master                     : ok=24   changed=17   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+worker1                    : ok=15   changed=11   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+mbp:kubernetes-setup ivanov1$ date
+Thu May 13 23:16:13 +06 2021
+mbp:kubernetes-setup ivanov1$ ssh -L 8001:127.0.0.1:8001 kubeuser@84.201.161.8
+Welcome to Ubuntu 20.04 LTS (GNU/Linux 5.4.0-26-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+kubeuser@epdo63p78o4ksh6ln2rb:~$ date
+Thu May 13 17:17:05 UTC 2021
+kubeuser@epdo63p78o4ksh6ln2rb:~$ kubectl get nodes
+NAME                   STATUS   ROLES    AGE    VERSION
+epde78hjfria3r6gt65g   Ready    <none>   90s    v1.19.3
+epdo63p78o4ksh6ln2rb   Ready    master   115s   v1.19.3
+kubeuser@epdo63p78o4ksh6ln2rb:~$ cat <<EOF | kubectl apply -f -
+> apiVersion: v1
+> kind: ServiceAccount
+> metadata:
+>   name: admin-user
+>   namespace: kubernetes-dashboard
+> EOF
+serviceaccount/admin-user created
+kubeuser@epdo63p78o4ksh6ln2rb:~$
+kubeuser@epdo63p78o4ksh6ln2rb:~$ cat <<EOF | kubectl apply -f -
+> apiVersion: rbac.authorization.k8s.io/v1
+> kind: ClusterRoleBinding
+> metadata:
+>   name: admin-user
+> roleRef:
+>   apiGroup: rbac.authorization.k8s.io
+>   kind: ClusterRole
+>   name: cluster-admin
+> subjects:
+> - kind: ServiceAccount
+>   name: admin-user
+>   namespace: kubernetes-dashboard
+> EOF
+clusterrolebinding.rbac.authorization.k8s.io/admin-user created
+kubeuser@epdo63p78o4ksh6ln2rb:~$ kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
+eyJhbGciOiJSUzI1NiIsImtpZCI6ImFaR2w0ZXpicFc5QWdoVG1CZXdWODBOM3FSUkNkZ3lDQlROX2lWM2dUWHcifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWdrNzJ6Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI3MTk5MjRmMy0wNjJkLTQ5NzctOGU1NC1iNmI5MmExZDU1NTYiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.Qrp8o4s7FDa2GFpXjSjxfsBcNltra7lNlNeINi3TFrK6oHf9XMiio2ieJUJYMaRiq7DKHtODChhjNuscjkV9d5YbNcKnrlebC5srv9e1-pWIpb51E0jlIcRwvjxjSj3JBpOpctRcaZf6kGaFUCsmVWl18JjjqmPE1aSs8yLHraaQ7XbehzXsGo-nxDAQzk2Nzdo81OV2O8mcDEJMnuGTtuHw_1qTV5i6pr9TN1Pq9VXD0MOxxgehmMEi0K1jf9yZy1EXr4y26WTQA7DEKSR0-7q-WmPKUYU6ncgC6gesG9u8DbCAhCWHpq1EK3-NsbjI54dsRK6O8-Dr1fzb4-Vy6wkubeuser@epdo63p78o4ksh6ln2rb:~$
+kubeuser@epdo63p78o4ksh6ln2rb:~$ kubectl proxy
+Starting to serve on 127.0.0.1:8001
+^C
+kubeuser@epdo63p78o4ksh6ln2rb:~$ exichannel 9: open failed: connect failed: Connection refused
+tchannel 3: open failed: connect failed: Connection refused
+^C
+kubeuser@epdo63p78o4ksh6ln2rb:~$ exit
+logout
+Connection to 84.201.161.8 closed.
+mbp:kubernetes-setup ivanov1$ cd ..
+mbp:yc_terraform_k8s ivanov1$ terraform destroy
+yandex_vpc_network.network-1: Refreshing state... [id=enpevd3eicot702tjvp0]
+yandex_vpc_subnet.subnet-1: Refreshing state... [id=e2leb2h2q2ffbk35bi16]
+yandex_compute_instance.vm-2: Refreshing state... [id=epde78hjfria3r6gt65g]
+yandex_compute_instance.vm-1: Refreshing state... [id=epdo63p78o4ksh6ln2rb]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm-1 will be destroyed
+  - resource "yandex_compute_instance" "vm-1" {
+      - created_at                = "2021-05-13T17:06:12Z" -> null
+      - folder_id                 = "b1gml04mkuv0fgnb0j5k" -> null
+      - fqdn                      = "epdo63p78o4ksh6ln2rb.auto.internal" -> null
+      - hostname                  = "epdo63p78o4ksh6ln2rb" -> null
+      - id                        = "epdo63p78o4ksh6ln2rb" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "user-data" = <<-EOT
+                #cloud-config
+                users:
+                  - name: robot
+                    groups: sudo
+                    shell: /bin/bash
+                    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+                    ssh-authorized-keys:
+                      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDYsxvRNx9jDGqO+KRyQFavaAyCMylDxGiPH3rviEj3bCn5cFFeUyWnxiC0aSr95JalnZ3KwaKAHGJC3ZUhui/4kJbtb94krQrNOBDKQBx6wsuwmcQAV0a9sF1a2CGVnbnzZ/aV979U9SncN96danGzePt84r+HoHxYyJydimoC9w== ivanov1@mbp.local
+            EOT
+        } -> null
+      - name                      = "terraform1" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v2" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-b" -> null
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "epdbk48des8ea138fg1r" -> null
+          - disk_id     = "epdbk48des8ea138fg1r" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - image_id = "fd8vmcue7aajpmeo39kk" -> null
+              - size     = 10 -> null
+              - type     = "network-hdd" -> null
+            }
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "192.168.10.30" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:18:30:f2:74" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "84.201.161.8" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e2leb2h2q2ffbk35bi16" -> null
+        }
+
+      - placement_policy {}
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+  # yandex_compute_instance.vm-2 will be destroyed
+  - resource "yandex_compute_instance" "vm-2" {
+      - created_at                = "2021-05-13T17:06:12Z" -> null
+      - folder_id                 = "b1gml04mkuv0fgnb0j5k" -> null
+      - fqdn                      = "epde78hjfria3r6gt65g.auto.internal" -> null
+      - hostname                  = "epde78hjfria3r6gt65g" -> null
+      - id                        = "epde78hjfria3r6gt65g" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "user-data" = <<-EOT
+                #cloud-config
+                users:
+                  - name: robot
+                    groups: sudo
+                    shell: /bin/bash
+                    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+                    ssh-authorized-keys:
+                      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDYsxvRNx9jDGqO+KRyQFavaAyCMylDxGiPH3rviEj3bCn5cFFeUyWnxiC0aSr95JalnZ3KwaKAHGJC3ZUhui/4kJbtb94krQrNOBDKQBx6wsuwmcQAV0a9sF1a2CGVnbnzZ/aV979U9SncN96danGzePt84r+HoHxYyJydimoC9w== ivanov1@mbp.local
+            EOT
+        } -> null
+      - name                      = "terraform2" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v2" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-b" -> null
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "epdhhnho14ein256gtfn" -> null
+          - disk_id     = "epdhhnho14ein256gtfn" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - image_id = "fd8vmcue7aajpmeo39kk" -> null
+              - size     = 10 -> null
+              - type     = "network-hdd" -> null
+            }
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "192.168.10.8" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:e3:a2:33:7e" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "84.201.138.149" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e2leb2h2q2ffbk35bi16" -> null
+        }
+
+      - placement_policy {}
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+  # yandex_vpc_network.network-1 will be destroyed
+  - resource "yandex_vpc_network" "network-1" {
+      - created_at = "2021-05-13T17:06:09Z" -> null
+      - folder_id  = "b1gml04mkuv0fgnb0j5k" -> null
+      - id         = "enpevd3eicot702tjvp0" -> null
+      - labels     = {} -> null
+      - name       = "network1" -> null
+      - subnet_ids = [
+          - "e2leb2h2q2ffbk35bi16",
+        ] -> null
+    }
+
+  # yandex_vpc_subnet.subnet-1 will be destroyed
+  - resource "yandex_vpc_subnet" "subnet-1" {
+      - created_at     = "2021-05-13T17:06:10Z" -> null
+      - folder_id      = "b1gml04mkuv0fgnb0j5k" -> null
+      - id             = "e2leb2h2q2ffbk35bi16" -> null
+      - labels         = {} -> null
+      - name           = "subnet1" -> null
+      - network_id     = "enpevd3eicot702tjvp0" -> null
+      - v4_cidr_blocks = [
+          - "192.168.10.0/24",
+        ] -> null
+      - v6_cidr_blocks = [] -> null
+      - zone           = "ru-central1-b" -> null
+    }
+
+Plan: 0 to add, 0 to change, 4 to destroy.
+
+Changes to Outputs:
+  - external_ip_address_vm_1 = "84.201.161.8" -> null
+  - external_ip_address_vm_2 = "84.201.138.149" -> null
+  - internal_ip_address_vm_1 = "192.168.10.30" -> null
+  - internal_ip_address_vm_2 = "192.168.10.8" -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.vm-1: Destroying... [id=epdo63p78o4ksh6ln2rb]
+yandex_compute_instance.vm-2: Destroying... [id=epde78hjfria3r6gt65g]
+yandex_compute_instance.vm-1: Still destroying... [id=epdo63p78o4ksh6ln2rb, 10s elapsed]
+yandex_compute_instance.vm-2: Still destroying... [id=epde78hjfria3r6gt65g, 10s elapsed]
+yandex_compute_instance.vm-1: Destruction complete after 14s
+yandex_compute_instance.vm-2: Destruction complete after 14s
+yandex_vpc_subnet.subnet-1: Destroying... [id=e2leb2h2q2ffbk35bi16]
+yandex_vpc_subnet.subnet-1: Destruction complete after 8s
+yandex_vpc_network.network-1: Destroying... [id=enpevd3eicot702tjvp0]
+yandex_vpc_network.network-1: Destruction complete after 1s
+
+Destroy complete! Resources: 4 destroyed.
+mbp:yc_terraform_k8s ivanov1$

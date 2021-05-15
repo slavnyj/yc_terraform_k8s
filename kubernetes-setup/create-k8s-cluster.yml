@@ -1,0 +1,157 @@
+# Creating a User with sudo privileges on All Remote Servers
+- name: Create user for k8s on all hosts
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create user - kubeuser
+      ansible.builtin.user:
+        name: kubeuser
+        append: yes 
+        state: present
+        createhome: yes 
+        shell: /bin/bash
+    - name: allow user kubeuser to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        line: ' kubeuser ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+    - name: Set authorized key for the kubeuser user
+      authorized_key:
+        user: kubeuser
+        key: '{{ item }}'
+      with_file:
+        - ~/.ssh/id_rsa.pub
+
+# Installing Kubernetes on All Remote Servers
+- hosts: all
+  become: yes
+  tasks:
+  - name: Remove swapfile from /etc/fstab
+    mount:
+      name: "{{ item }}"
+      fstype: swap
+      state: absent
+    with_items:
+      - swap
+      - none
+
+  - name: Disable swap
+    command: swapoff -a
+    when: ansible_swaptotal_mb > 0
+
+  - name: Install on servers - Docker
+    apt:
+      name: docker.io
+      state: present
+      update_cache: true
+ 
+  - name: Install on servers - APT Transport HTTPS
+    apt:
+      name: apt-transport-https
+      state: present
+ 
+  - name: Add Kubernetes apt-key
+    apt_key:
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+      state: present
+ 
+  - name: Add Kubernetes APT repository
+    apt_repository:
+      repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+      filename: 'kubernetes'
+ 
+  - name: Install on servers - kubelet
+    apt:
+      name: kubelet=1.19.3-00
+      state: present
+      update_cache: true
+ 
+  - name: Install on servers - kubeadm
+    apt:
+      name: kubeadm=1.19.3-00
+      state: present
+ 
+- hosts: master
+  become: yes
+  tasks:
+   - name: Install on master server - kubectl
+     apt:
+       name: kubectl=1.19.3-00
+       state: present
+       force: yes
+ 
+# Configure the Master Node on the Kubernetes cluster
+- hosts: master
+  become: yes
+  tasks:  
+  - name: Initialize the cluster
+    shell: sudo kubeadm init --pod-network-cidr=10.244.0.0/16 >> cluster_initialized.txt
+    args:
+      chdir: $HOME
+      creates: cluster_initialized.txt
+ 
+  - name: Create .kube directory
+    become: yes
+    become_user: kubeuser
+    vars:
+      allow_world_readable_tmpfiles: true
+    file:
+      path: $HOME/.kube
+      state: directory
+      mode: 0755
+ 
+  - name: Copy admin.conf to user's kube config
+    become: yes
+    copy:
+      src: /etc/kubernetes/admin.conf
+      dest: /home/kubeuser/.kube/config
+      remote_src: yes
+      owner: kubeuser
+ 
+  - name: Install Flannel Pod network
+    become: yes
+    become_user: kubeuser
+    vars:
+      allow_world_readable_tmpfiles: true
+    shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml >> pod_network_setup.txt
+    args:
+      chdir: $HOME
+      creates: pod_network_setup.txt
+
+# Configure the Worker Nodes
+- hosts: master
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Get join command
+      shell: sudo kubeadm token create --print-join-command
+      register: join_command_raw
+
+    - name: Set join command
+      set_fact:
+        join_command: "{{ join_command_raw.stdout_lines[0] }}"
+
+
+- hosts: workers
+  become: yes
+  tasks:
+    - name: Join to cluster
+      shell: "{{ hostvars['master'].join_command }} >> node_joined.txt"
+      args:
+        chdir: $HOME
+        creates: node_joined.txt
+
+# Install dashboard
+- hosts: master
+  become: yes
+  become_user: kubeuser
+  tasks:  
+  - name: Install k8s dashboard
+    shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+
+# # # # # # # How to access K8S Web UI from local machine # # # # # # #
+# Manual: https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+# Connect to Master Server: ssh -L 8001:127.0.0.1:8001 kubeuser@84.252.136.34
+# Open in local browser: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

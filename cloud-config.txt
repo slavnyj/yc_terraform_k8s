@@ -1,0 +1,8 @@
+#cloud-config
+users:
+  - name: robot
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDYsxvRNx9jDGqO+KRyQFavaAyCMylDxGiPH3rviEj3bCn5cFFeUyWnxiC0aSr95JalnZ3KwaKAHGJC3ZUhui/4kJbtb94krQrNOBDKQBx6wsuwmcQAV0a9sF1a2CGVnbnzZ/aV979U9SncN96danGzePt84r+HoHxYyJydimoC9w== ivanov1@mbp.local
